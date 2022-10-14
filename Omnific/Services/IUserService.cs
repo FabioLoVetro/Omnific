@@ -4,6 +4,7 @@ namespace Omnific.Services
 {
     public interface IUserService
     {
-        public User CreateNewUser();
+        public User CreateNewUserService(string username, string email, string password);
+        public List<User> GetAllUsersService();
     }
 }

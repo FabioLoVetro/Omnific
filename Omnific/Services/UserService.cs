@@ -1,16 +1,32 @@
-﻿using Omnific.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using Omnific.Model;
 
 namespace Omnific.Services
 {
+
     public class UserService : IUserService
     {
-        public UserService()
+        private readonly OmnificContext _context;
+
+        public UserService(OmnificContext context)
         {
+            _context = context;
         }
 
-        public User CreateNewUser()
+        public User CreateNewUserService(string userName, string eMail, string password)
         {
-            return new User();
+            User user = new User(userName,eMail,password);
+
+            _context.Add(user);
+            _context.SaveChanges();
+            return user;
+        }
+
+        public List<User> GetAllUsersService()
+        {
+            var Users = _context.Users.ToList();
+            return Users;
+
         }
     }
 }
