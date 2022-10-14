@@ -16,10 +16,16 @@ namespace Omnific.Controller
             _userService = userService;
         }
 
-        public ActionResult<User> CreateUser(string userName, string email, string password)
+        [HttpPost("New User")]
+        public ActionResult<User> CreateUserController(string username, string email, string password)
+        {
+            return _userService.CreateNewUserService(username, email, password);
+        }
+
+        [HttpGet]
         public ActionResult<IEnumerable<User>> GetAllUsersController()
         {
-            return _userService.CreateNewUser();
+            return _userService.GetAllUsersService();
         }
     }
 }
