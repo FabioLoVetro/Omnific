@@ -17,6 +17,7 @@ namespace Omnific.Controller
         }
 
         public ActionResult<User> CreateUser(string userName, string email, string password)
+        public ActionResult<IEnumerable<User>> GetAllUsersController()
         {
             return _userService.CreateNewUser();
         }
