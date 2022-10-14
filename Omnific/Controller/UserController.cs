@@ -9,14 +9,16 @@ namespace Omnific.Controller
     [ApiController]
     public class UserController : ControllerBase
     {
+        private IUserService _userService;
+
         public UserController(IUserService userService)
         {
-
+            _userService = userService;
         }
 
-        public ActionResult<User> Create()
+        public ActionResult<User> CreateUser(string userName, string email, string password)
         {
-            throw new NotImplementedException();
+            return _userService.CreateNewUser();
         }
     }
 }

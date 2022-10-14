@@ -1,12 +1,16 @@
-﻿namespace Omnific.Services
+﻿using Omnific.Model;
+
+namespace Omnific.Services
 {
     public class UserService : IUserService
     {
-        public UserService() { }
-
-        public string CreateNewUser()
+        public UserService()
         {
-            return "";
+        }
+
+        public User CreateNewUser()
+        {
+            return new User();
         }
     }
 }
