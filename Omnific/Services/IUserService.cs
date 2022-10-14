@@ -1,7 +1,9 @@
-﻿namespace Omnific.Services
+﻿using Omnific.Model;
+
+namespace Omnific.Services
 {
     public interface IUserService
     {
-        public string CreateNewUser();
+        public User CreateNewUser();
     }
 }

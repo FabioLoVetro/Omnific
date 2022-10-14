@@ -20,21 +20,18 @@ namespace Omnific.Test
             _userController = new UserController(_mockUserService.Object);
         }
 
-            [Test]
-        public void Create_New_User_Return_APIKey()
+        [Test]
+        public void CreateNewUser_Should_Return_A_User()
         {
             //Arrage
-            _mockUserService.Setup(b => b.CreateNewUser()).Returns("APIcode");
+            _mockUserService.Setup(b => b.CreateNewUser()).Returns(new User());
+
             //Act
             var newUser = _userController.Create();
+
             //Assert.Pass();
             newUser.Should().BeOfType(typeof(ActionResult<User>));
-            newUser.Value.Should().Be("APIcode");
-        }
-        [Test]
-        public void Test2()
-        {
-            Assert.Pass();
+            //newUser.Value.Should().Be("APIkey");
         }
     }
 }
