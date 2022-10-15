@@ -13,15 +13,6 @@ namespace Omnific.Test
     {
         private Mock<IUserService> _mockUserService;
         private UserController _userController;
-        private static List<User> GetTestUsers()
-        {
-            return new List<User>
-        {
-            new User("User1","User1@gmail.com","PWUser1"),
-            new User("User2","User2@gmail.com","PWUser2"),
-            new User("User3","User3@gmail.com","PWUser3"),
-        };
-        }
 
         [SetUp]
         public void Setup()
@@ -35,8 +26,7 @@ namespace Omnific.Test
         {
             //Arrage
             User user = new User("Paz", "pazsoangara@gmail.com", "pazzy");
-
-            _mockUserService.Setup(b => b.CreateNewUserService("","","")).Returns(user);
+            _mockUserService.Setup(b => b.CreateNewUser("","","")).Returns(user);
 
             //Act
             var newUser = _userController.CreateUserController("", "", "");
@@ -50,8 +40,7 @@ namespace Omnific.Test
         {
             //Arrange
             User user = new User("Paz", "pazsoangara@gmail.com", "pazzy");
-
-            _mockUserService.Setup(userService => userService.CreateNewUserService("", "", "")).Returns(user);
+            _mockUserService.Setup(userService => userService.CreateNewUser("", "", "")).Returns(user);
 
             //Act
             var newuser = _userController.CreateUserController("", "", "");
@@ -69,7 +58,7 @@ namespace Omnific.Test
         public void GetUsers_Returns_AllUsers()
         {
             //Arange
-            _mockUserService.Setup(b => b.GetAllUsersService()).Returns(GetTestUsers());
+            _mockUserService.Setup(b => b.GetAllUsers()).Returns(GetTestUsers());
 
             //Act
             var result = _userController.GetAllUsersController();
@@ -86,6 +75,16 @@ namespace Omnific.Test
             result.Value.ElementAt(2).Email.Should().BeEquivalentTo(GetTestUsers().ElementAt(2).Email);
             result.Value.ElementAt(2).Password.Should().BeEquivalentTo(GetTestUsers().ElementAt(2).Password);
             result.Value.Count().Should().Be(3);
+        }
+
+        private static List<User> GetTestUsers()
+        {
+            return new List<User>
+            {
+                new User("User1","User1@gmail.com","PWUser1"),
+                new User("User2","User2@gmail.com","PWUser2"),
+                new User("User3","User3@gmail.com","PWUser3"),
+            };
         }
     }
 }

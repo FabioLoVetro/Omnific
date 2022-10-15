@@ -4,6 +4,13 @@ namespace Omnific.Model
 {
     public class User
     {
+        public int Id { get; }
+        public string ApiKey { get; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public Type Type { get; }
+
         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
         public User(string username, string email, string password)
@@ -14,12 +21,5 @@ namespace Omnific.Model
             this.Password = password;
             this.Type = Type.Viewer;
         }
-
-        public int Id { get;}
-        public string ApiKey { get;}
-        public string UserName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public Type Type { get;}
     }
 }
