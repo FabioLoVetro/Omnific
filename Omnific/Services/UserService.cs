@@ -13,7 +13,7 @@ namespace Omnific.Services
             _context = context;
         }
 
-        public User CreateNewUserService(string userName, string eMail, string password)
+        public User CreateNewUser(string userName, string eMail, string password)
         {
             User user = new User(userName,eMail,password);
 
@@ -22,11 +22,10 @@ namespace Omnific.Services
             return user;
         }
 
-        public List<User> GetAllUsersService()
+        public List<User> GetAllUsers()
         {
-            var Users = _context.Users.ToList();
-            return Users;
-
+            var users = _context.Users.ToList();
+            return users;
         }
     }
 }

@@ -19,13 +19,13 @@ namespace Omnific.Controller
         [HttpPost("New User")]
         public ActionResult<User> CreateUserController(string username, string email, string password)
         {
-            return _userService.CreateNewUserService(username, email, password);
+            return _userService.CreateNewUser(username, email, password);
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<User>> GetAllUsersController()
         {
-            return _userService.GetAllUsersService();
+            return _userService.GetAllUsers();
         }
     }
 }
