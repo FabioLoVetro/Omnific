@@ -5,7 +5,7 @@ using Omnific.Model;
 
 namespace Omnific.Controller
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -16,7 +16,7 @@ namespace Omnific.Controller
             _userService = userService;
         }
 
-        [HttpPost("New User")]
+        [HttpPost]
         public ActionResult<User> CreateUserController(string username, string email, string password)
         {
             return _userService.CreateNewUser(username, email, password);
