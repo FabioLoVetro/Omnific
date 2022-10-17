@@ -16,6 +16,7 @@ namespace Omnific.Services
         public User CreateNewUser(string userName, string eMail, string password)
         {
             var user = new User(userName,eMail,password);
+            user.GenerateApiKey();
 
             _context.Add(user);
             _context.SaveChanges();
