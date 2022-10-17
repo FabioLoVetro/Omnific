@@ -5,10 +5,10 @@ using Omnific.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-//builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddControllers();
+//var connectionString = builder.Configuration.GetConnectionString("OmnificConnectionString");
 builder.Services.AddDbContext<OmnificContext>(option =>
     option.UseInMemoryDatabase("OmnificDB"));
 
@@ -27,14 +27,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-//app.UseStaticFiles();
-
-//app.UseRouting();
 
 app.UseAuthorization();
 
 app.MapControllers();
-
-//app.MapRazorPages();
 
 app.Run();

@@ -3,10 +3,10 @@
 namespace Omnific.Model
 {
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public enum Type
+        public enum UserType
         {
             Viewer,
-            Creator,
+            Inventor,
             Administrator
         }
 }

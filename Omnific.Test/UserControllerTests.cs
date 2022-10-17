@@ -25,7 +25,7 @@ namespace Omnific.Test
         public void CreateUser_Should_Return_A_User()
         {
             //Arrage
-            User user = new User("Paz", "pazsoangara@gmail.com", "pazzy");
+            var user = new User("Paz", "pazsoangara@gmail.com", "pazzy");
             _mockUserService.Setup(b => b.CreateNewUser("","","")).Returns(user);
 
             //Act
@@ -39,7 +39,7 @@ namespace Omnific.Test
         public void CreateUser_Should_Return_A_User_With_API_Key()
         {
             //Arrange
-            User user = new User("Paz", "pazsoangara@gmail.com", "pazzy");
+            var user = new User("Paz", "pazsoangara@gmail.com", "pazzy");
             _mockUserService.Setup(userService => userService.CreateNewUser("", "", "")).Returns(user);
 
             //Act
