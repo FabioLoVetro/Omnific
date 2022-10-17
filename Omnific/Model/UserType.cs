@@ -6,7 +6,7 @@ namespace Omnific.Model
         public enum UserType
         {
             Viewer,
-            Creator,
+            Inventor,
             Administrator
         }
 }

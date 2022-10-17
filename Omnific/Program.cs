@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddControllers();
+//var connectionString = builder.Configuration.GetConnectionString("OmnificConnectionString");
 builder.Services.AddDbContext<OmnificContext>(option =>
     option.UseInMemoryDatabase("OmnificDB"));
 
