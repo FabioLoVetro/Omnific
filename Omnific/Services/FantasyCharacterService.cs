@@ -11,9 +11,9 @@ namespace Omnific.Services
             _context = omnificContext;
         }
 
-        public FantasyCharacter CreateNewFantasyCharacter(string name, double hight, double weight, string habitat, string description, string characterBase, string pictureURL, string powers)
+        public FantasyCharacter CreateNewFantasyCharacter(string name, double hight, double weight, string habitat, string description, string characterBaseApha, string characterBaseBeta, string pictureURL, string powers)
         {
-            var fantasyCharacter = new FantasyCharacter(name, hight, weight, habitat, description, characterBase, pictureURL, powers);
+            var fantasyCharacter = new FantasyCharacter(name, hight, weight, habitat, description, characterBaseApha, characterBaseBeta, pictureURL, powers);
 
             _context.Add(fantasyCharacter);
             _context.SaveChanges();

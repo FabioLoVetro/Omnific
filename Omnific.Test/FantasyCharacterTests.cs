@@ -11,7 +11,7 @@ namespace Omnific.Test
         public void Given_A_User_GenerateApiKey_Should_Set_ApiKey_Property()
         {
             //Arrange
-            var fantasyCharacter = new FantasyCharacter("Dracat",5,100,"Cove", "Dracat: Dragon + Cat", "Dragon","www.dragoncat.com","Fire");
+            var fantasyCharacter = new FantasyCharacter("Dracat",5,100, "Air/Earth", "Dracat: Dragon + Cat", "Dragon", "Cat","www.dragoncat.com","Fire");
 
             //Act
             

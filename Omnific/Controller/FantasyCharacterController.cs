@@ -15,9 +15,9 @@ namespace Omnific.Controller
         }
 
         [HttpPost]
-        public ActionResult<FantasyCharacter> CreateFantasyCharacterController(string name, double hight, double weight, string habitat, string description, string characterBase, string pictureURL, string powers)
+        public ActionResult<FantasyCharacter> CreateFantasyCharacterController(string name, double hight, double weight, string habitat, string description, string characterBaseAlpha, string characterBaseBeta, string pictureURL, string powers)
         {
-            return _iFantasyCharacterService.CreateNewFantasyCharacter(name, hight, weight, habitat, description, characterBase, pictureURL, powers);
+            return _iFantasyCharacterService.CreateNewFantasyCharacter(name, hight, weight, habitat, description, characterBaseAlpha, characterBaseBeta, pictureURL, powers);
         }
 
         [HttpGet]
