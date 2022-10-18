@@ -9,7 +9,7 @@ namespace Omnific.Model
         public string UserName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public UserType Type { get; }
+        public UserType Type { get; set; }
 
         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -19,6 +19,7 @@ namespace Omnific.Model
             this.Email = Email;
             this.Password = Password;
             this.Type = UserType.Viewer;
+            this.Type = UserType.Inventor;
         }
 
         public void GenerateApiKey()

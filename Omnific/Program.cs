@@ -8,12 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddControllers();
-//var connectionString = builder.Configuration.GetConnectionString("OmnificConnectionString");
-builder.Services.AddDbContext<OmnificContext>(option =>
-    option.UseInMemoryDatabase("OmnificDB"));
+var connectionString = builder.Configuration.GetConnectionString("OmnificConnectionString");
+Console.WriteLine("CONNECTIONSTRING IS  : " + connectionString);
+Console.WriteLine("CONNECTIONSTRING MySQL  : ");
+builder.Services.AddDbContext<OmnificContext>(option => option.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-// Configure Swagger/OpenAPI Documentation
-// You can learn more on this link: https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
