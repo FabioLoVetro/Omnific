@@ -18,8 +18,7 @@ namespace Omnific.Model
             this.UserName = UserName;
             this.Email = Email;
             this.Password = Password;
-            this.Type = UserType.Viewer;
-            this.Type = UserType.Inventor;
+            this.Type = UserType.Viewer;            
         }
 
         public void GenerateApiKey()
