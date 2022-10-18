@@ -20,6 +20,7 @@ namespace Omnific.Services
             
             _context.Add(user);
             _context.SaveChanges();
+
             return user;
         }
 
