@@ -6,9 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
-
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IFantasyCharacterService, FantasyCharacterService>();
+
 builder.Services.AddControllers();
+
 var connectionString = builder.Configuration.GetConnectionString("OmnificConnectionString");
 
 builder.Services.AddDbContext<OmnificContext>(option => option.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
