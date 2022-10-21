@@ -29,11 +29,11 @@ namespace Omnific.Test
         public void CreateFantasyCharacter_Should_Return_A_FantasyCharacter()
         {
             //Arrage
-            var fantasyCharacter = new FantasyCharacter("",0, 0, "", "", "", "","","");
-            _mockFantasyCharacterService.Setup(b => b.CreateNewFantasyCharacter("", 0, 0, "", "", "", "", "","")).Returns(fantasyCharacter);
+            var fantasyCharacter = new FantasyCharacter("",0, 0, "", "", "", "","");
+            _mockFantasyCharacterService.Setup(b => b.CreateNewFantasyCharacter("", 0, 0, "", "", "", "", "")).Returns(fantasyCharacter);
 
             //Act
-            var newFantasyCharacter = _fantasyCharacterController.CreateFantasyCharacterController("", 0, 0, "", "", "", "", "","");
+            var newFantasyCharacter = _fantasyCharacterController.CreateFantasyCharacterController("", 0, 0, "", "", "", "","");
 
             //Assert
             newFantasyCharacter.Should().BeOfType(typeof(ActionResult<FantasyCharacter>));

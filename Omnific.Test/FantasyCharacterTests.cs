@@ -10,14 +10,12 @@ namespace Omnific.Test
         [Test]
         public void Given_A_User_GenerateApiKey_Should_Set_ApiKey_Property()
         {
-            //Arrange
-            var fantasyCharacter = new FantasyCharacter("Dracat",5,100, "Air/Earth", "Dracat: Dragon + Cat", "Dragon", "Cat","www.dragoncat.com","Fire");
-
-            //Act
-            
+            //Arrange/Act
+            var fantasyCharacter = new FantasyCharacter("Dracat",5,100, "Air", "Dracat: Dragon + Cat", "www.dragoncat.com", "12345678", "Fire");
 
             //Assert
             fantasyCharacter.Should().BeOfType<FantasyCharacter>();
+            fantasyCharacter.Name.Should().Be("Dracat");
         }
     }
 }
