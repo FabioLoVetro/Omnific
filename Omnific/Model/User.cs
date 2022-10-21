@@ -40,5 +40,26 @@ namespace Omnific.Model
         {
             ApiKey = $"{new string(Enumerable.Repeat(chars, 8).Select(s => s[new Random().Next(s.Length)]).ToArray())}";
         }
+        /// <summary>
+        /// public bool IsUserAdministrator()
+        /// returns true if the user is an administrator,
+        /// false otherwise
+        /// </summary>
+        /// <returns></returns>
+        public bool IsUserAdministrator()
+        {
+            return this.UserType == UserType.Administrator;
+        }
+
+        /// <summary>
+        /// public bool IsUserInventor()
+        /// returns true if the user loggedin is an inventor,
+        /// false otherwise
+        /// </summary>
+        /// <returns></returns>
+        public bool IsUserInventor()
+        {
+            return this.UserType == UserType.Inventor;
+        }
     }
 }

@@ -7,7 +7,7 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public double Hight { get; set; }
+        public double Height { get; set; }
         public double Weight { get; set; }
         public string Habitat { get; set; }
         public string Description { get; set; }
@@ -16,15 +16,15 @@
         /// Constructor
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="hight"></param>
+        /// <param name="height"></param>
         /// <param name="weight"></param>
         /// <param name="habitat"></param>
         /// <param name="description"></param>
         /// <param name="pictureURL"></param>
-        public Character(string name, double hight, double weight, string habitat, string description, string pictureURL)
+        public Character(string name, double height, double weight, string habitat, string description, string pictureURL)
         {
             Name = name;
-            Hight = hight;
+            Height = height;
             Weight = weight;
             Habitat = habitat;
             Description = description;
