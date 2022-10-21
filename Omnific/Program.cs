@@ -4,13 +4,17 @@ using Omnific.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
+// Add services to the container.
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IFantasyCharacterService, FantasyCharacterService>();
+//builder.Services.AddScoped<IFantasyAnimalService, FantasyAnimalService>();
+builder.Services.AddScoped<ILogService, LogService>();
+
 builder.Services.AddControllers();
+
 var connectionString = builder.Configuration.GetConnectionString("OmnificConnectionString");
-Console.WriteLine("CONNECTIONSTRING IS  : " + connectionString);
-Console.WriteLine("CONNECTIONSTRING MySQL  : ");
+
 builder.Services.AddDbContext<OmnificContext>(option => option.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 builder.Services.AddEndpointsApiExplorer();
