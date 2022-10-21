@@ -14,16 +14,44 @@ namespace Omnific.Controller
             _iFantasyCharacterService = iFantasyCharacter;
         }
 
-        [HttpPost]
-        public ActionResult<FantasyCharacter> CreateFantasyCharacterController(string name, double hight, double weight, string habitat, string description, string characterBaseAlpha, string characterBaseBeta, string pictureURL, string powers)
+        [HttpPost("/FantasyCharacter")]
+        public ActionResult<FantasyCharacter> CreateFantasyCharacterController(string name, double height, double weight, string habitat, string description, string pictureURL, string APIKeyInventor, string powers)
         {
-            return _iFantasyCharacterService.CreateNewFantasyCharacter(name, hight, weight, habitat, description, characterBaseAlpha, characterBaseBeta, pictureURL, powers);
+            return _iFantasyCharacterService.CreateNewFantasyCharacter(name, height, weight, habitat, description, pictureURL, APIKeyInventor, powers);
         }
 
-        [HttpGet]
+        [HttpGet("/FantasyCharacter")]
         public ActionResult<IEnumerable<FantasyCharacter>> GetAllFantasyCharactersController()
         {
             return _iFantasyCharacterService.GetAllFantasyCharacters();
+        }
+        [HttpGet("/FantasyCharacter/APIKeyInventor")]
+        public ActionResult<IEnumerable<FantasyCharacter>> GetFantasyCharacterByAPIKeyInventorController(string APIKeyInventor)
+        {
+            return _iFantasyCharacterService.GetFantasyCharacterByAPIKeyInventor(APIKeyInventor);
+        }
+        [HttpGet("/FantasyCharacter/Id")]
+        public ActionResult<FantasyCharacter> GetFantasyCharacterByIdController(int id)
+        {
+            return _iFantasyCharacterService.GetFantasyCharacterById(id);
+        }
+        [HttpGet("/FantasyCharacter/Name")]
+        public ActionResult<IEnumerable<FantasyCharacter>> GetFantasyCharacterByNameController(string name)
+        {
+            return _iFantasyCharacterService.GetFantasyCharacterByName(name);
+        }
+        [HttpDelete("/FantasyCharacter")]
+        public ActionResult<FantasyCharacter> DeleteFantasyCharacterByIdController(int id)
+        {
+            return _iFantasyCharacterService.DeleteFantasyCharacterById(id);
+        }
+        [HttpPut("/FantasyCharacter")]
+        public ActionResult<FantasyCharacter> UpdateFantasyCharacterByIdController(int idFantasyCharacterToUpdate,
+    string newName, double newHeight, double newWeight, string newHabitat,
+    string newDescription, string newPictureURL, string newPowers)
+        {
+            return _iFantasyCharacterService.UpdateFantasyCharacterById(idFantasyCharacterToUpdate,
+    newName, newHeight, newWeight, newHabitat, newDescription, newPictureURL, newPowers);
         }
     }
 }
