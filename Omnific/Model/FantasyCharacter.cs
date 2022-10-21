@@ -9,26 +9,22 @@
     public class FantasyCharacter : Character
     {
         public string APIKeyInventor { get; set; }
-        public string CharacterBaseAlpha { get; set; }
-        public string CharacterBaseBeta { get; set; }
         public string Powers { get; set; }
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="hight"></param>
+        /// <param name="height"></param>
         /// <param name="weight"></param>
         /// <param name="habitat"></param>
         /// <param name="description"></param>
-        /// <param name="characterBaseAlpha"></param>
-        /// <param name="characterBaseBeta"></param>
         /// <param name="pictureURL"></param>
         /// <param name="powers"></param>
-        public FantasyCharacter(string name, double hight, double weight, string habitat, string description, string characterBaseAlpha, string characterBaseBeta, string pictureURL, string powers) : base(name, hight, weight, habitat, description, pictureURL)
+        public FantasyCharacter(string name, double height, double weight, string habitat, 
+            string description, string pictureURL, string APIKeyInventor, string powers) : 
+            base(name, height, weight, habitat, description, pictureURL)
         {
-            APIKeyInventor = "UID-APIK";
-            CharacterBaseAlpha = characterBaseAlpha;
-            CharacterBaseBeta = characterBaseBeta;
+            this.APIKeyInventor = APIKeyInventor;
             Powers = powers;
         }
     }
