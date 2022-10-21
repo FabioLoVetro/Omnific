@@ -24,5 +24,15 @@ namespace Omnific.Model
         /// Contains all the FantasyCharacters created by inventors.
         /// </summary>
         public DbSet<FantasyCharacter> FantasyCharacters { get; set; }
+        /// <summary>
+        /// Table FantasyCharacters.
+        /// Contains all the FantasyCharacters created by inventors.
+        /// </summary>
+        //public DbSet<FantasyAnimal> FantasyAnimals { get; set; }
+        /// <summary>
+        /// Table Logs
+        /// Containg all the logs of the users
+        /// </summary>
+        public DbSet<Log> Logs { get; set; }
     }
 }
