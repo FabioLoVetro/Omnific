@@ -15,9 +15,10 @@ namespace Omnific.Controller
         }
 
         [HttpPost("/FantasyCharacter")]
-        public ActionResult<FantasyCharacter> CreateFantasyCharacterController(string name, double height, double weight, string habitat, string description, string pictureURL, string APIKeyInventor, string powers)
+        public ActionResult<FantasyCharacter?> CreateFantasyCharacterController(
+            string name, double height, double weight, string habitat, string description, string pictureURL, string powers)
         {
-            return _iFantasyCharacterService.CreateNewFantasyCharacter(name, height, weight, habitat, description, pictureURL, APIKeyInventor, powers);
+            return _iFantasyCharacterService.CreateNewFantasyCharacter(name, height, weight, habitat, description, pictureURL, powers);
         }
 
         [HttpGet("/FantasyCharacter")]
@@ -31,7 +32,7 @@ namespace Omnific.Controller
             return _iFantasyCharacterService.GetFantasyCharacterByAPIKeyInventor(APIKeyInventor);
         }
         [HttpGet("/FantasyCharacter/Id")]
-        public ActionResult<FantasyCharacter> GetFantasyCharacterByIdController(int id)
+        public ActionResult<FantasyCharacter?> GetFantasyCharacterByIdController(int id)
         {
             return _iFantasyCharacterService.GetFantasyCharacterById(id);
         }
@@ -41,12 +42,12 @@ namespace Omnific.Controller
             return _iFantasyCharacterService.GetFantasyCharacterByName(name);
         }
         [HttpDelete("/FantasyCharacter")]
-        public ActionResult<FantasyCharacter> DeleteFantasyCharacterByIdController(int id)
+        public ActionResult<FantasyCharacter?> DeleteFantasyCharacterByIdController(int id)
         {
             return _iFantasyCharacterService.DeleteFantasyCharacterById(id);
         }
         [HttpPut("/FantasyCharacter")]
-        public ActionResult<FantasyCharacter> UpdateFantasyCharacterByIdController(int idFantasyCharacterToUpdate,
+        public ActionResult<FantasyCharacter?> UpdateFantasyCharacterByIdController(int idFantasyCharacterToUpdate,
     string newName, double newHeight, double newWeight, string newHabitat,
     string newDescription, string newPictureURL, string newPowers)
         {

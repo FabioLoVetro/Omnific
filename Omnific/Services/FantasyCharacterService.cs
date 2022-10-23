@@ -30,15 +30,14 @@ namespace Omnific.Services
         /// <param name="habitat"></param>
         /// <param name="description"></param>
         /// <param name="pictureURL"></param>
-        /// <param name="ApiKeyInventor"></param>
         /// <param name="powers"></param>
         /// <returns></returns>
-        public FantasyCharacter? CreateNewFantasyCharacter(string name, double height, double weight, string habitat, string description, string pictureURL, string APIKeyInventor, string powers)
+        public FantasyCharacter? CreateNewFantasyCharacter(string name, double height, double weight, string habitat, string description, string pictureURL, string powers)
         {
             var userLoggedIn = _context.Users.FirstOrDefault(user => user.Id == (_context.Logs.ToList().ElementAt(0).IdUser));
             // if the user is not logged in return null
             if (userLoggedIn == null) return null;
-
+            string APIKeyInventor = userLoggedIn.ApiKey;
             var fantasyCharacter = new FantasyCharacter(name, height, weight, habitat, description, pictureURL, APIKeyInventor, powers);
 
             _context.Add(fantasyCharacter);
@@ -58,7 +57,7 @@ namespace Omnific.Services
         {
             //retrieve the logged in user
             var userLoggedIn = _context.Users.FirstOrDefault(user => user.Id == (_context.Logs.ToList().ElementAt(0).IdUser));
-            FantasyCharacter fantasyCharacter = this.GetFantasyCharacterById(id);
+            FantasyCharacter? fantasyCharacter = this.GetFantasyCharacterById(id);
             // if the user is not logged in return null
             if (userLoggedIn != null
                 && fantasyCharacter != null
@@ -136,7 +135,7 @@ namespace Omnific.Services
         {
             //retrieve the logged in user
             var userLoggedIn = _context.Users.FirstOrDefault(user => user.Id == (_context.Logs.ToList().ElementAt(0).IdUser));
-            FantasyCharacter fantasyCharacter = this.GetFantasyCharacterById(idFantasyCharacterToUpdate);
+            FantasyCharacter? fantasyCharacter = this.GetFantasyCharacterById(idFantasyCharacterToUpdate);
             // if the user is not logged in return null
             if (userLoggedIn != null
                 && fantasyCharacter != null

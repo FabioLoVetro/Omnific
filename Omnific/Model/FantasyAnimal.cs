@@ -19,23 +19,23 @@ namespace Omnific.Model
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="Name"></param>
-        /// <param name="Height"></param>
-        /// <param name="Weight"></param>
-        /// <param name="Habitat"></param>
-        /// <param name="Description"></param>
-        /// <param name="PictureURL"></param>
+        /// <param name="name"></param>
+        /// <param name="height"></param>
+        /// <param name="weight"></param>
+        /// <param name="habitat"></param>
+        /// <param name="description"></param>
+        /// <param name="pictureURL"></param>
         /// <param name="APIKeyInventor"></param>
-        /// <param name="Powers"></param>
+        /// <param name="powers"></param>
         /// <param name="animalBaseAlpha"></param>
         /// <param name="animalBaseBeta"></param>
-        public FantasyAnimal(string Name, double Height, double Weight, string Habitat,
-            string Description, string PictureURL, string APIKeyInventor, string Powers,
+        public FantasyAnimal(string name, double height, double weight, string habitat,
+            string description, string pictureURL, string APIKeyInventor, string powers,
             string animalBaseAlpha, string animalBaseBeta) : base(
-                Name, Height, Weight, Habitat, Description, PictureURL)
+                name, height, weight, habitat, description, pictureURL)
         {
             this.APIKeyInventor = APIKeyInventor;
-            this.Powers = Powers;
+            this.Powers = powers;
             AnimalBaseAlpha = animalBaseAlpha;
             AnimalBaseBeta = animalBaseBeta;
         }

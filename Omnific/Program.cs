@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IFantasyCharacterService, FantasyCharacterService>();
-//builder.Services.AddScoped<IFantasyAnimalService, FantasyAnimalService>();
+builder.Services.AddScoped<IFantasyAnimalService, FantasyAnimalService>();
 builder.Services.AddScoped<ILogService, LogService>();
 
 builder.Services.AddControllers();

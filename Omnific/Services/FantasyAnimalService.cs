@@ -36,8 +36,8 @@ namespace Omnific.Services
         /// <param name="animalBaseBeta"></param>
         /// <returns></returns>
         public FantasyAnimal? CreateNewFantasyAnimal(
-            string Name, double Height, double Weight, string Habitat,
-            string Description, string PictureURL, string Powers,
+            string name, double height, double weight, string habitat,
+            string description, string pictureURL, string powers,
             string animalBaseAlpha, string animalBaseBeta)
         {
             var userLoggedIn = _context.Users.FirstOrDefault(user => user.Id == (_context.Logs.ToList().ElementAt(0).IdUser));
@@ -45,8 +45,8 @@ namespace Omnific.Services
             if (userLoggedIn == null) return null;
             string APIKeyInventor = userLoggedIn.ApiKey;
             var fantasyAnimal = new FantasyAnimal(
-                Name, Height, Weight, Habitat, Description, PictureURL,
-                APIKeyInventor, Powers, animalBaseAlpha, animalBaseBeta);
+                name, height, weight, habitat, description, pictureURL,
+                APIKeyInventor, powers, animalBaseAlpha, animalBaseBeta);
 
             _context.Add(fantasyAnimal);
             _context.SaveChanges();

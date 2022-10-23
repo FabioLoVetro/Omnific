@@ -17,12 +17,12 @@ namespace Omnific.Controller
 
         [HttpPost("/FantasyAnimal")]
         public ActionResult<FantasyAnimal?> CreateFantasyAnimalController(
-            string Name, double Height, double Weight, string Habitat,
-            string Description, string PictureURL, string Powers,
+            string name, double height, double weight, string habitat,
+            string description, string pictureURL, string powers,
             string animalBaseAlpha, string animalBaseBeta)
         {
             return _iFantasyAnimalService.CreateNewFantasyAnimal(
-                Name, Height, Weight, Habitat, Description, PictureURL, Powers,
+                name, height, weight, habitat, description, pictureURL, powers,
                 animalBaseAlpha, animalBaseBeta);
         }
 
