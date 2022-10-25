@@ -23,10 +23,10 @@ namespace Omnific.Model
         /// <param name="isLoggedIn"></param>
         public Log(int idUser, DateTime dateTimeIn, DateTime dateTimeOut, bool isLoggedIn)
         {
-            IdUser = idUser;
-            DateTimeIn = dateTimeIn;
-            DateTimeOut = dateTimeOut;
-            IsLoggedIn = isLoggedIn;
+            this.IdUser = idUser;
+            this.DateTimeIn = dateTimeIn;
+            this.DateTimeOut = dateTimeOut;
+            this.IsLoggedIn = isLoggedIn;
         }
     }
 }

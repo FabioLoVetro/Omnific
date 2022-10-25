@@ -17,49 +17,49 @@ namespace Omnific.Controller
             _userService = userService;
         }
 
-        [HttpPost]
+        [HttpPost("/User")]
         public ActionResult<User> CreateUserController(string username, string email, string password)
         {
             return _userService.CreateNewUser(username, email, password);
         }
 
-        [HttpGet]
+        [HttpGet("/User")]
         public ActionResult<IEnumerable<User>> GetAllUsersController()
         {
             return _userService.GetAllUsers();
         }
 
-        [HttpGet("/Id")]
+        [HttpGet("/User/Id")]
         public ActionResult<User> GetUserByIdController(int id)
         {
             return _userService.GetUserById(id);
         }
 
-        [HttpGet("/APIKey")]
+        [HttpGet("/User/APIKey")]
         public ActionResult<User> GetUserByAPIKeyController(string APIKey)
         {
             return _userService.GetUserByApiKey(APIKey);
         }
 
-        [HttpGet("/UserName")]
+        [HttpGet("/User/UserName")]
         public ActionResult<User> GetUserByUserNameController(string userName)
         {
             return _userService.GetUserByUsername(userName);
         }
 
-        [HttpGet("/EMail")]
+        [HttpGet("/User/EMail")]
         public ActionResult<User> GetUserByEMailController(string eMail)
         {
             return _userService.GetUserByEmail(eMail);
         }
 
-        [HttpDelete]
+        [HttpDelete("/User")]
         public ActionResult<User> DeleteUserByIdController(int id)
         {
             return _userService.DeleteUserById(id);
         }
 
-        [HttpPut]
+        [HttpPut("/User")]
         public ActionResult<User> UpdateUserByIdController(int idUserToUpdate, string newUserName, string newEMail, string newPassword)
         {
             return _userService.UpdateUserById(idUserToUpdate, newUserName, newEMail, newPassword);
