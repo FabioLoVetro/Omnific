@@ -6,20 +6,60 @@ namespace Omnific.Test
 {
     public class UserTests
     {
+        private User user;
+
+        [SetUp]
+
+        public void SetUp()
+        {
+            user = new User("Pali", "pali@gmail.com", "password");
+        }
+        [Test]
+        public void UserTest_Should_Return_A_User_With_The_Right_Parameters()
+        {
+            user.Should().NotBeNull();
+            user.UserName.Should().Be("Pali");
+            user.Email.Should().Be("pali@gmail.com");
+            user.Password.Should().Be("password");
+            user.UserType.Should().Be(UserType.Viewer);
+        }
 
         [Test]
         public void Given_A_User_GenerateApiKey_Should_Set_ApiKey_Property()
         {
-            //Arrange
-            var user1 = new User("Pali", "pali@gmail.com", "password");
-
-            //Act
-            user1.GenerateApiKey();
-
-            //Assert
-            user1.ApiKey.Should().NotBeNull();
+            user.GenerateApiKey();
+            user.ApiKey.Should().NotBeNull();
+            var APIKeyUser = user.ApiKey;
+            user.ApiKey.Should().Be(APIKeyUser);
+            user.ApiKey.Length.Should().Be(8);
         }
+        
+
+        [Test]
+        public void IsUserAdministrator_Returns_True()
+        {
+            user.UserType = UserType.Administrator;
+            user.IsUserAdministrator().Should().BeTrue();
+        }
+        [Test]
+        public void IsUserAdministrator_Returns_False()
+        {
+            user.IsUserAdministrator().Should().BeFalse();
+        }
+
+        [Test]
+        public void IsUserInventor_Returns_True()
+        {
+            user.UserType = UserType.Inventor;
+            user.IsUserInventor().Should().BeTrue();
+        }
+
+        [Test]
+        public void IsUserInventor_Returns_False()
+        {
+            user.IsUserInventor().Should().BeFalse();
+        }
+
     }
 }
 
- 
