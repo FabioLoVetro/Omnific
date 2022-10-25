@@ -15,7 +15,20 @@ builder.Services.AddControllers();
 
 var connectionString = builder.Configuration.GetConnectionString("OmnificConnectionString");
 
-builder.Services.AddDbContext<OmnificContext>(option => option.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+if (builder.Environment.EnvironmentName == "Testing")
+{
+    // in test environment use a fresh in-memory DB
+    builder.Services.AddDbContext<OmnificContext>(option =>
+        option.UseInMemoryDatabase("OmnificDb"));
+    
+}
+else
+{
+    // connect to the local MySQL dev database
+    builder.Services.AddDbContext<OmnificContext>(option => option.UseMySql(
+        connectionString, ServerVersion.AutoDetect(connectionString)));
+}
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -23,7 +36,7 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Testing")
 {
     app.UseSwagger();
     app.UseSwaggerUI();
