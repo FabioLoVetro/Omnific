@@ -16,9 +16,9 @@ namespace Omnific.Controller
 
         [HttpPost("/FantasyCharacter")]
         public ActionResult<FantasyCharacter?> CreateFantasyCharacterController(
-            string name, double height, double weight, string habitat, string description, string pictureURL, string powers)
+            string name, double height, double weight, string habitat, string description, string picture, string powers)
         {
-            return _iFantasyCharacterService.CreateNewFantasyCharacter(name, height, weight, habitat, description, pictureURL, powers);
+            return _iFantasyCharacterService.CreateNewFantasyCharacter(name, height, weight, habitat, description, picture, powers);
         }
 
         [HttpGet("/FantasyCharacter")]
@@ -49,10 +49,10 @@ namespace Omnific.Controller
         [HttpPut("/FantasyCharacter")]
         public ActionResult<FantasyCharacter?> UpdateFantasyCharacterByIdController(int idFantasyCharacterToUpdate,
     string newName, double newHeight, double newWeight, string newHabitat,
-    string newDescription, string newPictureURL, string newPowers)
+    string newDescription, string newPicture, string newPowers)
         {
             return _iFantasyCharacterService.UpdateFantasyCharacterById(idFantasyCharacterToUpdate,
-    newName, newHeight, newWeight, newHabitat, newDescription, newPictureURL, newPowers);
+    newName, newHeight, newWeight, newHabitat, newDescription, newPicture, newPowers);
         }
     }
 }

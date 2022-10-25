@@ -11,7 +11,7 @@
         public double Weight { get; set; }
         public string Habitat { get; set; }
         public string Description { get; set; }
-        public string PictureURL { get; set; }
+        public string Picture { get; set; }
         /// <summary>
         /// Constructor
         /// </summary>
@@ -20,15 +20,15 @@
         /// <param name="weight"></param>
         /// <param name="habitat"></param>
         /// <param name="description"></param>
-        /// <param name="pictureURL"></param>
-        public Character(string name, double height, double weight, string habitat, string description, string pictureURL)
+        /// <param name="picture"></param>
+        public Character(string name, double height, double weight, string habitat, string description, string picture)
         {
             Name = name;
             Height = height;
             Weight = weight;
             Habitat = habitat;
             Description = description;
-            PictureURL = pictureURL;
+            Picture = picture;
         }
     }
 }

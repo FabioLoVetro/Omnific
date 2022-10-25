@@ -21,14 +21,14 @@ namespace Omnific.Model
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="UserName"></param>
-        /// <param name="Email"></param>
-        /// <param name="Password"></param>
-        public User(string UserName, string Email, string Password)
+        /// <param name="userName"></param>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        public User(string userName, string email, string password)
         {
-            this.UserName = UserName;
-            this.Email = Email;
-            this.Password = Password;
+            this.UserName = userName;
+            this.Email = email;
+            this.Password = password;
             this.UserType = UserType.Viewer;
         }
         /// <summary>

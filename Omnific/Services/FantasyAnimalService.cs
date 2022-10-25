@@ -37,7 +37,7 @@ namespace Omnific.Services
         /// <returns></returns>
         public FantasyAnimal? CreateNewFantasyAnimal(
             string name, double height, double weight, string habitat,
-            string description, string pictureURL, string powers,
+            string description, string picture, string powers,
             string animalBaseAlpha, string animalBaseBeta)
         {
             var userLoggedIn = _context.Users.FirstOrDefault(user => user.Id == (_context.Logs.ToList().ElementAt(0).IdUser));
@@ -45,7 +45,7 @@ namespace Omnific.Services
             if (userLoggedIn == null) return null;
             string APIKeyInventor = userLoggedIn.ApiKey;
             var fantasyAnimal = new FantasyAnimal(
-                name, height, weight, habitat, description, pictureURL,
+                name, height, weight, habitat, description, picture,
                 APIKeyInventor, powers, animalBaseAlpha, animalBaseBeta);
 
             _context.Add(fantasyAnimal);
@@ -124,7 +124,7 @@ namespace Omnific.Services
 
         public FantasyAnimal? UpdateFantasyAnimalById(int idFantasyAnimalToUpdate,
     string newName, double newHeight, double newWeight, string newHabitat,
-    string newDescription, string newPictureURL, string newPowers, string newAnimalBaseAlpha, string newAnimalBaseBeta)
+    string newDescription, string newPicture, string newPowers, string newAnimalBaseAlpha, string newAnimalBaseBeta)
         {
             //retrieve the logged in user
             var userLoggedIn = _context.Users.FirstOrDefault(user => user.Id == (_context.Logs.ToList().ElementAt(0).IdUser));
@@ -139,7 +139,7 @@ namespace Omnific.Services
                 fantasyAnimal.Weight = newWeight;
                 fantasyAnimal.Habitat = newHabitat;
                 fantasyAnimal.Description = newDescription;
-                fantasyAnimal.PictureURL = newPictureURL;
+                fantasyAnimal.Picture = newPicture;
                 fantasyAnimal.Powers = newPowers;
                 fantasyAnimal.AnimalBaseAlpha = newAnimalBaseAlpha;
                 fantasyAnimal.AnimalBaseBeta = newAnimalBaseBeta;

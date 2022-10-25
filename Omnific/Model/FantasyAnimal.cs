@@ -30,9 +30,9 @@ namespace Omnific.Model
         /// <param name="animalBaseAlpha"></param>
         /// <param name="animalBaseBeta"></param>
         public FantasyAnimal(string name, double height, double weight, string habitat,
-            string description, string pictureURL, string APIKeyInventor, string powers,
+            string description, string picture, string APIKeyInventor, string powers,
             string animalBaseAlpha, string animalBaseBeta) : base(
-                name, height, weight, habitat, description, pictureURL)
+                name, height, weight, habitat, description, picture)
         {
             this.APIKeyInventor = APIKeyInventor;
             this.Powers = powers;

@@ -16,13 +16,13 @@
         /// <param name="weight"></param>
         /// <param name="habitat"></param>
         /// <param name="description"></param>
-        /// <param name="pictureURL"></param>
+        /// <param name="picture"></param>
         /// <param name="APIKeyInventor"></param>
         /// <param name="powers"></param>
         public FantasyCharacter(
             string name, double height, double weight, string habitat,
-            string description, string pictureURL, string APIKeyInventor, string powers)
-            :base(name, height, weight, habitat, description, pictureURL)
+            string description, string picture, string APIKeyInventor, string powers)
+            :base(name, height, weight, habitat, description, picture)
         {
             this.APIKeyInventor = APIKeyInventor;
             this.Powers = powers;

@@ -32,13 +32,13 @@ namespace Omnific.Services
         /// <param name="pictureURL"></param>
         /// <param name="powers"></param>
         /// <returns></returns>
-        public FantasyCharacter? CreateNewFantasyCharacter(string name, double height, double weight, string habitat, string description, string pictureURL, string powers)
+        public FantasyCharacter? CreateNewFantasyCharacter(string name, double height, double weight, string habitat, string description, string picture, string powers)
         {
             var userLoggedIn = _context.Users.FirstOrDefault(user => user.Id == (_context.Logs.ToList().ElementAt(0).IdUser));
             // if the user is not logged in return null
             if (userLoggedIn == null) return null;
             string APIKeyInventor = userLoggedIn.ApiKey;
-            var fantasyCharacter = new FantasyCharacter(name, height, weight, habitat, description, pictureURL, APIKeyInventor, powers);
+            var fantasyCharacter = new FantasyCharacter(name, height, weight, habitat, description, picture, APIKeyInventor, powers);
 
             _context.Add(fantasyCharacter);
             _context.SaveChanges();
@@ -131,7 +131,7 @@ namespace Omnific.Services
         /// <returns></returns>
         public FantasyCharacter? UpdateFantasyCharacterById(int idFantasyCharacterToUpdate,
             string newName, double newHeight, double newWeight, string newHabitat,
-            string newDescription, string newPictureURL, string newPowers)
+            string newDescription, string newPicture, string newPowers)
         {
             //retrieve the logged in user
             var userLoggedIn = _context.Users.FirstOrDefault(user => user.Id == (_context.Logs.ToList().ElementAt(0).IdUser));
@@ -146,7 +146,7 @@ namespace Omnific.Services
                 fantasyCharacter.Weight = newWeight;
                 fantasyCharacter.Habitat = newHabitat;
                 fantasyCharacter.Description = newDescription;
-                fantasyCharacter.PictureURL = newPictureURL;
+                fantasyCharacter.Picture = newPicture;
                 fantasyCharacter.Powers = newPowers;
                 _context.SaveChanges();
                 return fantasyCharacter;

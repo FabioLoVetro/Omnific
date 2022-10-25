@@ -5,8 +5,8 @@ namespace Omnific.Services
     public interface IFantasyAnimalService
     {
         public FantasyAnimal? CreateNewFantasyAnimal(
-            string Name, double Height, double Weight, string Habitat,
-            string Description, string PictureURL, string Powers,
+            string name, double height, double weight, string habitat,
+            string description, string pictureURL, string powers,
             string animalBaseAlpha, string animalBaseBeta);
         public FantasyAnimal? DeleteFantasyAnimalById(int id);
         public List<FantasyAnimal> GetFantasyAnimalByAPIKeyInventor(string APIKeyInventor);
