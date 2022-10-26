@@ -16,55 +16,55 @@ namespace Omnific.Controller
         }
 
         [HttpPost("/FantasyAnimal")]
-        public ActionResult<FantasyAnimal?> CreateFantasyAnimalController(
+        public ActionResult<FantasyAnimal?> CreateFantasyAnimal(
             string name, double height, double weight, string habitat,
-            string description, string picture, string powers,
+            string description, string picture, string APIKeyInventor, string powers,
             string animalBaseAlpha, string animalBaseBeta)
         {
             return _iFantasyAnimalService.CreateNewFantasyAnimal(
-                name, height, weight, habitat, description, picture, powers,
+                name, height, weight, habitat, description, picture, APIKeyInventor, powers,
                 animalBaseAlpha, animalBaseBeta);
         }
 
         [HttpGet("/FantasyAnimal")]
-        public ActionResult<IEnumerable<FantasyAnimal>> GetAllFantasyAnimalsController()
+        public ActionResult<IEnumerable<FantasyAnimal>> GetAllFantasyAnimal()
         {
             return _iFantasyAnimalService.GetAllFantasyAnimal();
         }
 
         [HttpGet("/FantasyAnimal/APIKeyInventor")]
-        public ActionResult<IEnumerable<FantasyAnimal>> GetFantasyAnimalByAPIKeyInventorController(string APIKeyInventor)
+        public ActionResult<IEnumerable<FantasyAnimal>> GetFantasyAnimalByAPIKeyInventor(string APIKeyInventor)
         {
             return _iFantasyAnimalService.GetFantasyAnimalByAPIKeyInventor(APIKeyInventor);
         }
 
         [HttpGet("/FantasyAnimal/Id")]
-        public ActionResult<FantasyAnimal?> GetFantasyAnimalByIdController(int id)
+        public ActionResult<FantasyAnimal?> GetFantasyAnimalById(int id)
         {
             return _iFantasyAnimalService.GetFantasyAnimalById(id);
         }
 
         [HttpGet("/FantasyAnimal/Name")]
-        public ActionResult<IEnumerable<FantasyAnimal>> GetFantasyAnimalByNameController(string name)
+        public ActionResult<IEnumerable<FantasyAnimal>> GetFantasyAnimalByName(string name)
         {
             return _iFantasyAnimalService.GetFantasyAnimalByName(name);
         }
 
         [HttpDelete("/FantasyAnimal")]
-        public ActionResult<FantasyAnimal?> DeleteFantasyAnimalByIdController(int id)
+        public ActionResult<FantasyAnimal?> DeleteFantasyAnimalById(int id)
         {
             return _iFantasyAnimalService.DeleteFantasyAnimalById(id);
         }
 
         [HttpPut("/FantasyAnimal")]
-        public ActionResult<FantasyAnimal?> UpdateFantasyAnimalByIdController(
+        public ActionResult<FantasyAnimal?> UpdateFantasyAnimalById(
             int idFantasyAnimalToUpdate,
             string newName, double newHeight, double newWeight, string newHabitat,
-            string newDescription, string newPictureURL, string newPowers,
+            string newDescription, string newPicture, string newAPIKeyInventor, string newPowers,
             string newAnimalBaseAlpha, string newAnimalBaseBeta)
         {
             return _iFantasyAnimalService.UpdateFantasyAnimalById(idFantasyAnimalToUpdate,
-                newName, newHeight, newWeight, newHabitat, newDescription, newPictureURL, newPowers,
+                newName, newHeight, newWeight, newHabitat, newDescription, newPicture,  newAPIKeyInventor, newPowers,
                 newAnimalBaseAlpha, newAnimalBaseBeta);
         }
     }
