@@ -33,7 +33,7 @@ namespace Omnific.Test
             _mockUserService.Setup(b => b.CreateNewUser("", "", "")).Returns(user);
 
             //Act
-            var newUser = _userController.CreateUserController("", "", "");
+            var newUser = _userController.CreateUser("", "", "");
 
             //Assert
             newUser.Should().BeOfType(typeof(ActionResult<User>));
@@ -52,7 +52,7 @@ namespace Omnific.Test
             //Arrange          
             _mockUserService.Setup(userService => userService.CreateNewUser("", "", "")).Returns(user);
             //Act
-            var newUser = _userController.CreateUserController("", "", "");
+            var newUser = _userController.CreateUser("", "", "");
             //Assert
             
             newUser.Value.ApiKey.Should().Be(user.ApiKey);
@@ -67,7 +67,7 @@ namespace Omnific.Test
             _mockUserService.Setup(b => b.GetAllUsers()).Returns(GetTestUsers());
 
             //Act
-            var result = _userController.GetAllUsersController();
+            var result = _userController.GetAllUsers();
 
             //Assert
             result.Should().BeOfType(typeof(ActionResult<IEnumerable<User>>));
