@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Omnific.Services;
 using Omnific.Model;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Omnific.Controller
 {
@@ -18,49 +17,49 @@ namespace Omnific.Controller
         }
 
         [HttpPost("/User")]
-        public ActionResult<User> CreateUserController(string username, string email, string password)
+        public ActionResult<User> CreateUser(string username, string email, string password)
         {
             return _userService.CreateNewUser(username, email, password);
         }
 
         [HttpGet("/User")]
-        public ActionResult<IEnumerable<User>> GetAllUsersController()
+        public ActionResult<IEnumerable<User>> GetAllUsers()
         {
             return _userService.GetAllUsers();
         }
 
         [HttpGet("/User/Id")]
-        public ActionResult<User> GetUserByIdController(int id)
+        public ActionResult<User> GetUserById(int id)
         {
             return _userService.GetUserById(id);
         }
 
         [HttpGet("/User/APIKey")]
-        public ActionResult<User> GetUserByAPIKeyController(string APIKey)
+        public ActionResult<User> GetUserByAPIKey(string APIKey)
         {
             return _userService.GetUserByApiKey(APIKey);
         }
 
         [HttpGet("/User/UserName")]
-        public ActionResult<User> GetUserByUserNameController(string userName)
+        public ActionResult<User> GetUserByUserName(string userName)
         {
             return _userService.GetUserByUsername(userName);
         }
 
         [HttpGet("/User/EMail")]
-        public ActionResult<User> GetUserByEMailController(string eMail)
+        public ActionResult<User> GetUserByEMail(string eMail)
         {
             return _userService.GetUserByEmail(eMail);
         }
 
         [HttpDelete("/User")]
-        public ActionResult<User> DeleteUserByIdController(int id)
+        public ActionResult<User> DeleteUserById(int id)
         {
             return _userService.DeleteUserById(id);
         }
 
         [HttpPut("/User")]
-        public ActionResult<User> UpdateUserByIdController(int idUserToUpdate, string newUserName, string newEMail, string newPassword)
+        public ActionResult<User> UpdateUserById(int idUserToUpdate, string newUserName, string newEMail, string newPassword)
         {
             return _userService.UpdateUserById(idUserToUpdate, newUserName, newEMail, newPassword);
         }
