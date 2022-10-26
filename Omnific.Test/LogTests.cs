@@ -28,7 +28,7 @@ namespace Omnific.Test
             dateOutO = logout.DateTimeOut;
         }
         [Test]
-        public void Log_LoggedIn_Test()
+        public void Log_Constructor_For_User_LoggedIn_Test()
         {
             log.Should().NotBeNull();
             log.Id.Should().Be(1);
@@ -39,7 +39,7 @@ namespace Omnific.Test
         }
 
         [Test]
-        public void Log_LoggedOut_Test()
+        public void Log_Constructor_For_User_LoggedOut_Test()
         {
             logout.Should().NotBeNull();
             logout.Id.Should().Be(2);
