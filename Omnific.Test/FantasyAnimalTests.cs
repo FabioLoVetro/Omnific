@@ -7,7 +7,7 @@ namespace Omnific.Test
     {
 
         [Test]
-        public void FantasyAnimal_Test()
+        public void FantasyAnimal_Constructor_Test()
         {
             //Arrange/Act
             var fantasyAnimal = new FantasyAnimal("Dracat", 5, 200, "Air/Earth", "Dracat: Dragon + Cat", "www.omnific.com/fantasyanimal/1", "12345678", "Fire", "Dragon", "Cat");
