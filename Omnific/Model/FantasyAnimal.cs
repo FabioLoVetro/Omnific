@@ -1,7 +1,4 @@
-﻿
-using System.Xml.Linq;
-
-namespace Omnific.Model
+﻿namespace Omnific.Model
 {
     /// <summary>
     /// FantasyAnimal is a character invented by an user inventor.
@@ -24,7 +21,7 @@ namespace Omnific.Model
         /// <param name="weight"></param>
         /// <param name="habitat"></param>
         /// <param name="description"></param>
-        /// <param name="pictureURL"></param>
+        /// <param name="picture"></param>
         /// <param name="APIKeyInventor"></param>
         /// <param name="powers"></param>
         /// <param name="animalBaseAlpha"></param>
