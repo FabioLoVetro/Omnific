@@ -1,4 +1,5 @@
-﻿using Omnific.Model;
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using Omnific.Model;
 
 namespace Omnific.Services
 {
@@ -29,21 +30,16 @@ namespace Omnific.Services
         /// <param name="weight"></param>
         /// <param name="habitat"></param>
         /// <param name="description"></param>
-        /// <param name="pictureURL"></param>
+        /// <param name="picture"></param>
         /// <param name="powers"></param>
         /// <returns></returns>
-        public FantasyCharacter? CreateNewFantasyCharacter(string name, double height, double weight, string habitat, string description, string picture, string powers)
+        public FantasyCharacter? CreateNewFantasyCharacter(string name, double height, double weight, string habitat, string description, string picture, string APIKeyInventor, string powers)
         {
-            var userLoggedIn = _context.Users.FirstOrDefault(user => user.Id == (_context.Logs.ToList().ElementAt(0).IdUser));
-            // if the user is not logged in return null
-            if (userLoggedIn == null) return null;
-            string APIKeyInventor = userLoggedIn.ApiKey;
             var fantasyCharacter = new FantasyCharacter(name, height, weight, habitat, description, picture, APIKeyInventor, powers);
 
             _context.Add(fantasyCharacter);
             _context.SaveChanges();
-            //if the user is a viewer, set it as inventor
-            if (userLoggedIn.UserType == UserType.Viewer) userLoggedIn.UserType = UserType.Inventor;
+            //add code to change the user type if is a viewer, set it as inventor
 
             return fantasyCharacter;
         }
@@ -55,13 +51,9 @@ namespace Omnific.Services
         /// <returns></returns>
         public FantasyCharacter? DeleteFantasyCharacterById(int id)
         {
-            //retrieve the logged in user
-            var userLoggedIn = _context.Users.FirstOrDefault(user => user.Id == (_context.Logs.ToList().ElementAt(0).IdUser));
             FantasyCharacter? fantasyCharacter = this.GetFantasyCharacterById(id);
             // if the user is not logged in return null
-            if (userLoggedIn != null
-                && fantasyCharacter != null
-                && (userLoggedIn.IsUserAdministrator() || userLoggedIn.ApiKey == fantasyCharacter.APIKeyInventor))
+            if (fantasyCharacter != null)
             {
                 _context.Remove(fantasyCharacter);
                 _context.SaveChanges();
@@ -74,7 +66,7 @@ namespace Omnific.Services
         /// returns the list of the fantasy character
         /// </summary>
         /// <returns></returns>
-        public List<FantasyCharacter> GetAllFantasyCharacters()
+        public List<FantasyCharacter> GetAllFantasyCharacter()
         {
             var fantasyCharacters = _context.FantasyCharacters.ToList();
             return fantasyCharacters;
@@ -126,20 +118,16 @@ namespace Omnific.Services
         /// <param name="newWeight"></param>
         /// <param name="newHabitat"></param>
         /// <param name="newDescription"></param>
-        /// <param name="newPictureURL"></param>
+        /// <param name="newPicture"></param>
         /// <param name="newPowers"></param>
         /// <returns></returns>
         public FantasyCharacter? UpdateFantasyCharacterById(int idFantasyCharacterToUpdate,
             string newName, double newHeight, double newWeight, string newHabitat,
-            string newDescription, string newPicture, string newPowers)
+            string newDescription, string newPicture, string APIKeyInventor, string newPowers)
         {
-            //retrieve the logged in user
-            var userLoggedIn = _context.Users.FirstOrDefault(user => user.Id == (_context.Logs.ToList().ElementAt(0).IdUser));
             FantasyCharacter? fantasyCharacter = this.GetFantasyCharacterById(idFantasyCharacterToUpdate);
             // if the user is not logged in return null
-            if (userLoggedIn != null
-                && fantasyCharacter != null
-                && (userLoggedIn.IsUserAdministrator() || userLoggedIn.ApiKey == fantasyCharacter.APIKeyInventor))
+            if (fantasyCharacter != null)
             {
                 fantasyCharacter.Name = newName;
                 fantasyCharacter.Height = newHeight;
@@ -147,7 +135,9 @@ namespace Omnific.Services
                 fantasyCharacter.Habitat = newHabitat;
                 fantasyCharacter.Description = newDescription;
                 fantasyCharacter.Picture = newPicture;
+                fantasyCharacter.APIKeyInventor = APIKeyInventor;
                 fantasyCharacter.Powers = newPowers;
+
                 _context.SaveChanges();
                 return fantasyCharacter;
             }

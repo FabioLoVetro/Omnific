@@ -37,22 +37,16 @@ namespace Omnific.Services
         /// <returns></returns>
         public FantasyAnimal? CreateNewFantasyAnimal(
             string name, double height, double weight, string habitat,
-            string description, string picture, string powers,
+            string description, string picture, string APIKeyInventor, string powers,
             string animalBaseAlpha, string animalBaseBeta)
         {
-            var userLoggedIn = _context.Users.FirstOrDefault(user => user.Id == (_context.Logs.ToList().ElementAt(0).IdUser));
-            // if the user is not logged in return null
-            if (userLoggedIn == null) return null;
-            string APIKeyInventor = userLoggedIn.ApiKey;
             var fantasyAnimal = new FantasyAnimal(
                 name, height, weight, habitat, description, picture,
                 APIKeyInventor, powers, animalBaseAlpha, animalBaseBeta);
 
             _context.Add(fantasyAnimal);
             _context.SaveChanges();
-            //if the user is a viewer, set it as inventor
-            if (userLoggedIn.UserType == UserType.Viewer) userLoggedIn.UserType = UserType.Inventor;
-
+            //add code to change the user type if is a viewer
             return fantasyAnimal;
         }
         /// <summary>
@@ -63,13 +57,9 @@ namespace Omnific.Services
         /// <returns></returns>
         public FantasyAnimal? DeleteFantasyAnimalById(int id)
         {
-            //retrieve the logged in user
-            var userLoggedIn = _context.Users.FirstOrDefault(user => user.Id == (_context.Logs.ToList().ElementAt(0).IdUser));
             FantasyAnimal? fantasyAnimal = this.GetFantasyAnimalById(id);
             // if the user is not logged in return null
-            if (userLoggedIn != null
-                && fantasyAnimal != null
-                && (userLoggedIn.IsUserAdministrator() || userLoggedIn.ApiKey == fantasyAnimal.APIKeyInventor))
+            if (fantasyAnimal != null)
             {
                 _context.Remove(fantasyAnimal);
                 _context.SaveChanges();
@@ -124,15 +114,11 @@ namespace Omnific.Services
 
         public FantasyAnimal? UpdateFantasyAnimalById(int idFantasyAnimalToUpdate,
     string newName, double newHeight, double newWeight, string newHabitat,
-    string newDescription, string newPicture, string newPowers, string newAnimalBaseAlpha, string newAnimalBaseBeta)
+    string newDescription, string newPicture, string newAPIKeyInventor, string newPowers, string newAnimalBaseAlpha, string newAnimalBaseBeta)
         {
-            //retrieve the logged in user
-            var userLoggedIn = _context.Users.FirstOrDefault(user => user.Id == (_context.Logs.ToList().ElementAt(0).IdUser));
             FantasyAnimal? fantasyAnimal = this.GetFantasyAnimalById(idFantasyAnimalToUpdate);
             // if the user is not logged in return null
-            if (userLoggedIn != null
-                && fantasyAnimal != null
-                && (userLoggedIn.IsUserAdministrator() || userLoggedIn.ApiKey == fantasyAnimal.APIKeyInventor))
+            if (fantasyAnimal != null)
             {
                 fantasyAnimal.Name = newName;
                 fantasyAnimal.Height = newHeight;
@@ -140,9 +126,11 @@ namespace Omnific.Services
                 fantasyAnimal.Habitat = newHabitat;
                 fantasyAnimal.Description = newDescription;
                 fantasyAnimal.Picture = newPicture;
+                fantasyAnimal.APIKeyInventor = newAPIKeyInventor;
                 fantasyAnimal.Powers = newPowers;
                 fantasyAnimal.AnimalBaseAlpha = newAnimalBaseAlpha;
                 fantasyAnimal.AnimalBaseBeta = newAnimalBaseBeta;
+
                 _context.SaveChanges();
                 return fantasyAnimal;
             }
