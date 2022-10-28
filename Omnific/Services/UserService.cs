@@ -50,8 +50,7 @@ namespace Omnific.Services
         /// <summary>
         public User? DeleteUserById(int id)
         {
-            var userLoggedIn = this.GetUserById(_context.Logs.ToList().ElementAt(0).IdUser);
-            if (userLoggedIn != null && (userLoggedIn.IsUserAdministrator() || userLoggedIn.Id == id) && this.UserExists(id))
+            if (this.UserExists(id))
             {
                 var user = GetUserById(id);
                 _context.Remove(user);
@@ -129,8 +128,7 @@ namespace Omnific.Services
         /// <returns></returns>
         public User? UpdateUserById(int id, string newUserName, string newEMail, string newPassword)
         {
-            var userLoggedIn = this.GetUserById(_context.Logs.ToList().ElementAt(0).IdUser);
-            if (userLoggedIn != null && (userLoggedIn.IsUserAdministrator() || userLoggedIn.Id == id) && this.UserExists(id))
+            if (this.UserExists(id))
             {
                 var u = this.GetUserById(id);
                 u.UserName = newUserName;
