@@ -15,18 +15,19 @@ builder.Services.AddControllers();
 
 var connectionString = builder.Configuration.GetConnectionString("OmnificConnectionString");
 
-if (builder.Environment.EnvironmentName == "Testing")
+if (builder.Environment.IsProduction()|| builder.Environment.IsDevelopment())
 {
-    // in test environment use a fresh in-memory DB
-    builder.Services.AddDbContext<OmnificContext>(option =>
-        option.UseInMemoryDatabase("OmnificDb"));
-    
+    // real database
+    builder.Services.AddDbContext<OmnificContext>(option => option.UseMySql(
+        connectionString, ServerVersion.AutoDetect(connectionString)));
+
 }
 else
 {
-    // connect to the local MySQL dev database
-    builder.Services.AddDbContext<OmnificContext>(option => option.UseMySql(
-        connectionString, ServerVersion.AutoDetect(connectionString)));
+    //if (builder.Environment.EnvironmentName == "Testing")
+    // in test environment use a fresh in-memory DB
+    builder.Services.AddDbContext<OmnificContext>(option =>
+        option.UseInMemoryDatabase("OmnificDb"));
 }
 
 
@@ -36,7 +37,7 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Testing")
+if (app.Environment.IsProduction() || app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Testing")
 {
     app.UseSwagger();
     app.UseSwaggerUI();

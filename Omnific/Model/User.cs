@@ -8,12 +8,12 @@ namespace Omnific.Model
     /// </summary>
     public class User
     {
-        public int Id { get; set; }
-        public string ApiKey { get; set; }
-        public string UserName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public UserType UserType { get; set; }
+        public int Id { get; set; } = 0;
+        public string ApiKey { get; set; } = string.Empty;
+        public string UserName { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public UserType UserType { get; set; } = UserType.Viewer;
         /// <summary>
         /// List of fonts to generate the APIKey
         /// </summary>
@@ -29,7 +29,6 @@ namespace Omnific.Model
             this.UserName = userName;
             this.Email = email;
             this.Password = password;
-            this.UserType = UserType.Viewer;
         }
         /// <summary>
         /// public void GenerateApiKey()
