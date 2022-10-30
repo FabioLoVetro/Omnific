@@ -12,7 +12,8 @@ namespace Omnific.Model
         public string ApiKey { get; set; } = string.Empty;
         public string UserName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
+        public byte[] PasswordSalt { get; set; }
+        public byte[] PasswordHash { get; set; }
         public UserType UserType { get; set; } = UserType.Viewer;
         /// <summary>
         /// List of fonts to generate the APIKey
@@ -24,11 +25,12 @@ namespace Omnific.Model
         /// <param name="userName"></param>
         /// <param name="email"></param>
         /// <param name="password"></param>
-        public User(string userName, string email, string password)
+        public User(string userName, string email, byte[] passwordSalt, byte[] passwordHash)
         {
             this.UserName = userName;
             this.Email = email;
-            this.Password = password;
+            this.PasswordSalt = passwordSalt;
+            this.PasswordHash = passwordHash;
         }
         /// <summary>
         /// public void GenerateApiKey()

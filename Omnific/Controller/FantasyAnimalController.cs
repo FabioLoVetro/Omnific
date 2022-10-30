@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Omnific.Model;
 using Omnific.Services;
+using System.Data;
 
 namespace Omnific.Controller
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Administrator")]
     public class FantasyAnimalController : ControllerBase
     {
         private IFantasyAnimalService _iFantasyAnimalService;

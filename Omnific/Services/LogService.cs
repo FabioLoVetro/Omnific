@@ -30,18 +30,20 @@ namespace Omnific.Services
         /// <returns></returns>
         public Log? CreateNewLog(string userName, string password)
         {
+            /*
             foreach (var entity in _context.Logs)
                 _context.Logs.Remove(entity);
             _context.SaveChanges();
             //try to retrive the user
-            var userLoggedIn = _context.Users.FirstOrDefault(user => user.UserName == userName && user.Password == password);
+            //var userLoggedIn = _context.Users.FirstOrDefault(user => user.UserName == userName && user.Password == password);
             //if is null
-            if (userLoggedIn == null) return null;
+            //if (userLoggedIn == null) return null;
             
-            var log = new Log(userLoggedIn.Id, DateTime.Now, DateTime.Now, true);
+            //var log = new Log(userLoggedIn.Id, DateTime.Now, DateTime.Now, true);
             _context.Add(log);
             _context.SaveChanges();
-            return log;
+            */
+            return null;
         }
     }
 }
