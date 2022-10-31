@@ -12,7 +12,7 @@ namespace Omnific.Test
 
         public void SetUp()
         {
-            user = new User("Pali", "pali@gmail.com", "password");
+            user = new User("Pali", "pali@gmail.com", new byte[1], new byte[1]);
         }
         [Test]
         public void UserTest_Should_Return_A_User_With_The_Right_Parameters()
@@ -20,7 +20,8 @@ namespace Omnific.Test
             user.Should().NotBeNull();
             user.UserName.Should().Be("Pali");
             user.Email.Should().Be("pali@gmail.com");
-            user.Password.Should().Be("password");
+            user.PasswordSalt.Should().BeEquivalentTo(new byte[1]);
+            user.PasswordHash.Should().BeEquivalentTo(new byte[1]);
             user.UserType.Should().Be(UserType.Viewer);
         }
 

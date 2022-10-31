@@ -34,7 +34,7 @@ namespace Omnific.Services
         {
             var user = new User(userName, eMail, passwordSalt, passwordHash);
 
-            user.GenerateApiKey();
+            //user.GenerateApiKey();
 
             _context.Add(user);
             _context.SaveChanges();
@@ -134,7 +134,7 @@ namespace Omnific.Services
             user.Email = newEMail;
             user.PasswordSalt = passwordSalt;
             user.PasswordHash = passwordHash;
-
+            
             _context.SaveChanges();
 
             return user;

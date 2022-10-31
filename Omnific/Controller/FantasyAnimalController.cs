@@ -8,7 +8,7 @@ namespace Omnific.Controller
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Administrator")]
+    [Authorize]
     public class FantasyAnimalController : ControllerBase
     {
         private IFantasyAnimalService _iFantasyAnimalService;
@@ -54,12 +54,14 @@ namespace Omnific.Controller
         }
 
         [HttpDelete("/FantasyAnimal")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult<FantasyAnimal?> DeleteFantasyAnimalById(int id)
         {
             return _iFantasyAnimalService.DeleteFantasyAnimalById(id);
         }
 
         [HttpPut("/FantasyAnimal")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult<FantasyAnimal?> UpdateFantasyAnimalById(
             int idFantasyAnimalToUpdate,
             string newName, double newHeight, double newWeight, string newHabitat,

@@ -24,13 +24,15 @@ namespace Omnific.Model
         /// </summary>
         /// <param name="userName"></param>
         /// <param name="email"></param>
-        /// <param name="password"></param>
+        /// <param name="passwordSalt"></param>
+        /// <param name="passwordHash"></param>
         public User(string userName, string email, byte[] passwordSalt, byte[] passwordHash)
         {
             this.UserName = userName;
             this.Email = email;
             this.PasswordSalt = passwordSalt;
             this.PasswordHash = passwordHash;
+            this.GenerateApiKey();
         }
         /// <summary>
         /// public void GenerateApiKey()

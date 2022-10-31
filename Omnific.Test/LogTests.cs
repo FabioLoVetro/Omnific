@@ -16,7 +16,7 @@ namespace Omnific.Test
 
         public void SetUp()
         {
-            user = new User("Pali", "pali@gmail.com", "password");
+            user = new User("Pali", "pali@gmail.com", new byte[10], new byte[10]);
             user.Id = 1;
             log = new Log(1, DateTime.Now, DateTime.Now, true);
             log.Id = 1;

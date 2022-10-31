@@ -12,17 +12,21 @@ namespace Omnific.Test
     public class UserControllerTests
     {
         private Mock<IUserService> _mockUserService;
+        private Mock<IAuthenticationService> _mockAuthenticationService;
         private UserController _userController;
         private User user;
+        private byte[] passwordSalt;
+        private byte[] passwordHash;
 
         [SetUp]
         public void Setup()
         {
             _mockUserService = new Mock<IUserService>();
-            _userController = new UserController(_mockUserService.Object);
-            user = new User("Paz", "pazsoangara@gmail.com", "pazzy");
+            _mockAuthenticationService = new Mock<IAuthenticationService>();
+            _userController = new UserController(_mockUserService.Object, _mockAuthenticationService.Object);
+            user = new User("Paz", "pazsoangara@gmail.com", passwordSalt, passwordHash);
             user.Id = 1;
-            user.GenerateApiKey();
+            //user.GenerateApiKey();
         }
 
         [Test]
@@ -30,7 +34,7 @@ namespace Omnific.Test
         {
             //Arrage
 
-            _mockUserService.Setup(b => b.CreateNewUser("", "", "")).Returns(user);
+            _mockUserService.Setup(b => b.CreateNewUser("", "", passwordSalt, passwordHash)).Returns(user);
 
             //Act
             var newUser = _userController.CreateUser("", "", "");
@@ -38,10 +42,13 @@ namespace Omnific.Test
             //Assert
             newUser.Should().BeOfType(typeof(ActionResult<User>));
 
+            newUser.Value.Should().NotBeNull();
+            newUser.Value.Should().BeEquivalentTo(user);
             newUser.Value.Id.Should().Be(user.Id);
             newUser.Value.UserName.Should().Be("Paz");
             newUser.Value.Email.Should().Be("pazsoangara@gmail.com");
-            newUser.Value.Password.Should().Be("pazzy");
+            newUser.Value.PasswordSalt.Should().BeEquivalentTo(passwordSalt);
+            newUser.Value.PasswordHash.Should().BeEquivalentTo(passwordHash);
         }
 
 
@@ -50,7 +57,7 @@ namespace Omnific.Test
         public void CreateUser_Should_Return_A_User_With_API_Key()
         {
             //Arrange          
-            _mockUserService.Setup(userService => userService.CreateNewUser("", "", "")).Returns(user);
+            _mockUserService.Setup(userService => userService.CreateNewUser("", "", passwordSalt, passwordHash)).Returns(user);
             //Act
             var newUser = _userController.CreateUser("", "", "");
             //Assert
@@ -73,13 +80,16 @@ namespace Omnific.Test
             result.Should().BeOfType(typeof(ActionResult<IEnumerable<User>>));
             result.Value.ElementAt(0).UserName.Should().BeEquivalentTo(GetTestUsers().ElementAt(0).UserName);
             result.Value.ElementAt(0).Email.Should().BeEquivalentTo(GetTestUsers().ElementAt(0).Email);
-            result.Value.ElementAt(0).Password.Should().BeEquivalentTo(GetTestUsers().ElementAt(0).Password);
+            result.Value.ElementAt(0).PasswordSalt.Should().BeEquivalentTo(GetTestUsers().ElementAt(0).PasswordSalt);
+            result.Value.ElementAt(0).PasswordHash.Should().BeEquivalentTo(GetTestUsers().ElementAt(0).PasswordHash);
             result.Value.ElementAt(1).UserName.Should().BeEquivalentTo(GetTestUsers().ElementAt(1).UserName);
             result.Value.ElementAt(1).Email.Should().BeEquivalentTo(GetTestUsers().ElementAt(1).Email);
-            result.Value.ElementAt(1).Password.Should().BeEquivalentTo(GetTestUsers().ElementAt(1).Password);
+            result.Value.ElementAt(1).PasswordSalt.Should().BeEquivalentTo(GetTestUsers().ElementAt(1).PasswordSalt);
+            result.Value.ElementAt(1).PasswordHash.Should().BeEquivalentTo(GetTestUsers().ElementAt(1).PasswordHash);
             result.Value.ElementAt(2).UserName.Should().BeEquivalentTo(GetTestUsers().ElementAt(2).UserName);
             result.Value.ElementAt(2).Email.Should().BeEquivalentTo(GetTestUsers().ElementAt(2).Email);
-            result.Value.ElementAt(2).Password.Should().BeEquivalentTo(GetTestUsers().ElementAt(2).Password);
+            result.Value.ElementAt(2).PasswordSalt.Should().BeEquivalentTo(GetTestUsers().ElementAt(2).PasswordSalt);
+            result.Value.ElementAt(2).PasswordHash.Should().BeEquivalentTo(GetTestUsers().ElementAt(2).PasswordHash);
             result.Value.Count().Should().Be(3);
         }
 
@@ -105,17 +115,17 @@ namespace Omnific.Test
             user.ApiKey.Should().Be(ApiKeyUser);
 
             _mockUserService.Setup(b => b.GetUserByApiKey("")).Returns(GetTestUsers().ElementAt(0));
-            GetTestUsers().ElementAt(0).GenerateApiKey();
+            //GetTestUsers().ElementAt(0).GenerateApiKey();
             ApiKeyUser = GetTestUsers().ElementAt(0).ApiKey;
             GetTestUsers().ElementAt(0).ApiKey.Should().Be(ApiKeyUser);
 
             _mockUserService.Setup(b => b.GetUserByApiKey("")).Returns(GetTestUsers().ElementAt(1));
-            GetTestUsers().ElementAt(1).GenerateApiKey();
+            //GetTestUsers().ElementAt(1).GenerateApiKey();
             ApiKeyUser = GetTestUsers().ElementAt(1).ApiKey;
             GetTestUsers().ElementAt(1).ApiKey.Should().Be(ApiKeyUser);
 
             _mockUserService.Setup(b => b.GetUserByApiKey("")).Returns(GetTestUsers().ElementAt(2));
-            GetTestUsers().ElementAt(2).GenerateApiKey();
+            //GetTestUsers().ElementAt(2).GenerateApiKey();
             ApiKeyUser = GetTestUsers().ElementAt(2).ApiKey;
             GetTestUsers().ElementAt(2).ApiKey.Should().Be(ApiKeyUser);
 
@@ -177,7 +187,7 @@ namespace Omnific.Test
         [Test]
         public void UpdateUserById_Test()
         {
-            _mockUserService.Setup(b => b.UpdateUserById(1,"","","")).Returns(user);
+            _mockUserService.Setup(b => b.UpdateUserById(1,"","", passwordSalt, passwordHash)).Returns(user);
             user.Should().NotBeNull();
         }
 
@@ -185,15 +195,18 @@ namespace Omnific.Test
         {
             var UserList= new List<User>
             {
-                new User("User1","User1@gmail.com","PWUser1"),
-                new User("User2","User2@gmail.com","PWUser2"),
-                new User("User3","User3@gmail.com","PWUser3"),
+                new User("User1","User1@gmail.com",new byte[1], new byte[1]),
+                new User("User2","User2@gmail.com",new byte[1], new byte[1]),
+                new User("User3","User3@gmail.com",new byte[1], new byte[1]),
             };
             UserList.ElementAt(0).Id=1;
+            UserList.ElementAt(0).ApiKey = "12345678";
             UserList.ElementAt(1).Id = 2;
+            UserList.ElementAt(1).ApiKey = "12345678";
             UserList.ElementAt(2).Id = 3;
+            UserList.ElementAt(2).ApiKey = "12345678";
 
-           
+
 
             return UserList;
         }
