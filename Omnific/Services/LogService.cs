@@ -28,22 +28,22 @@ namespace Omnific.Services
         /// <param name="DateTimeOut"></param>
         /// <param name="IsLoggedIn"></param>
         /// <returns></returns>
-        public Log? CreateNewLog(string userName, string password)
+        public Log CreateNewLog(int IdUser)
         {
-            /*
-            foreach (var entity in _context.Logs)
-                _context.Logs.Remove(entity);
-            _context.SaveChanges();
-            //try to retrive the user
-            //var userLoggedIn = _context.Users.FirstOrDefault(user => user.UserName == userName && user.Password == password);
-            //if is null
-            //if (userLoggedIn == null) return null;
-            
-            //var log = new Log(userLoggedIn.Id, DateTime.Now, DateTime.Now, true);
+            var log = new Log(IdUser, DateTime.Now, DateTime.Now, true);
             _context.Add(log);
             _context.SaveChanges();
-            */
-            return null;
+
+            return log;
+        }
+        /// <summary>
+        /// Returns the list of the logs
+        /// </summary>
+        /// <returns></returns>
+        public List<Log> GetAllLogs()
+        {
+            var log = _context.Logs.ToList();
+            return log;
         }
     }
 }

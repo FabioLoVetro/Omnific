@@ -19,13 +19,17 @@ namespace Omnific.Controller
         }
 
         [HttpPost]
-        public ActionResult<Log> CreateNewLogInController(string userName, string password)
+        public ActionResult<Log> CreateNewLogInController(int IdUser)
         {
-            var actionResult = _logService.CreateNewLog(userName, password);
-            if (actionResult == null)
-            {
-                return NotFound();
-            }
+            var actionResult = _logService.CreateNewLog(IdUser);
+
+            return actionResult;
+        }
+        [HttpGet]
+        public ActionResult<IEnumerable<Log>> GetAllLogsController()
+        {
+            var actionResult = _logService.GetAllLogs();
+
             return actionResult;
         }
     }
