@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Omnific.Model;
 
 namespace Omnific.Services
@@ -30,7 +31,7 @@ namespace Omnific.Services
         /// <param name="weight"></param>
         /// <param name="habitat"></param>
         /// <param name="description"></param>
-        /// <param name="pictureURL"></param>
+        /// <param name="picture"></param>
         /// <param name="powers"></param>
         /// <param name="animalBaseAlpha"></param>
         /// <param name="animalBaseBeta"></param>
@@ -46,7 +47,7 @@ namespace Omnific.Services
 
             _context.Add(fantasyAnimal);
             _context.SaveChanges();
-            //add code to change the user type if is a viewer
+
             return fantasyAnimal;
         }
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+﻿using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Omnific.Model;
 
 namespace Omnific.Services
@@ -39,7 +40,6 @@ namespace Omnific.Services
 
             _context.Add(fantasyCharacter);
             _context.SaveChanges();
-            //add code to change the user type if is a viewer, set it as inventor
 
             return fantasyCharacter;
         }
