@@ -22,7 +22,7 @@ It uses the MySQL database to store data locally and a cloud instance of the dat
 
 ## Project Development
 
-The project allowed us to develop the API where requests were sent to the controller and then being dispatched to the appriorpriate service. This was integrated to the MySQL database. There is a coverage of over 50 tests currently. 
+The project allowed us to develop the API where requests were sent to the controller and then being dispatched to the appriorpriate service. This was integrated to the MySQL database. There is a coverage of over 65 tests currently. 
 
 ## Updates To Implement
 
