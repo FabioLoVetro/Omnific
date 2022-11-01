@@ -1,4 +1,6 @@
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
@@ -42,6 +44,7 @@ else
 
 
 builder.Services.AddEndpointsApiExplorer();
+
 //added options in builder.Services.AddSwaggerGen()
 builder.Services.AddSwaggerGen(options =>
 {
@@ -54,6 +57,7 @@ builder.Services.AddSwaggerGen(options =>
     });
     options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
+
 //Authentication scheme
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -67,6 +71,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = false
         };
     });
+
+//healthcheck https://localhost:7152/healthchecks-ui
+builder.Services.AddHealthChecks().AddMySql(connectionString);
+builder.Services.AddHealthChecksUI().AddInMemoryStorage();
 
 var app = builder.Build();
 
@@ -86,5 +94,12 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHealthChecks("/HealthChecks", 
+    new HealthCheckOptions 
+    {
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse 
+    });
+app.MapHealthChecksUI();
 
 app.Run();
